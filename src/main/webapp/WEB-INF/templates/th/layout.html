@@ -1,0 +1,46 @@
+<!DOCTYPE html >
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="site-head">
+  <title th:text="#{title.application}">Tank Repository</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" media="all" href="../../../css/klaser.css" th:href="@{/css/klaser.css}"/>
+</head>
+
+<body>
+
+<header th:fragment="site-header">
+  <center><a href="index.html" th:href="@{/}"><img src="../../../images/logo.png" th:src="@{/images/logo.png}"/> </a>
+  </center>
+    <center><a href="repository.html" th:href="@{/tanks}">All</a>
+      <a href="inmaintenance.html" th:href="@{/inmaintenance}">Tanks in maintenance</a>
+      <a href="duplicates.html" th:href="@{/duplicates}">Duplicates</a>
+      <a href="tanks.html" th:href="@{/tanks/create}">Add tank</a></center>
+  <div align="right"><b>Logged:</b> <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b>
+    <form th:action="@{/logout}" method="POST" style="display: inline">
+      <input type=submit class="link" value="Logout"/>
+    </form>
+  </div>
+
+  <ul id="messages">
+    <li th:each="msg : ${MyMessages}" th:text="${msg.text}"
+        th:class="${#strings.toLowerCase(msg.type)}">
+    </li>
+    </ul>
+</header>
+
+<div>
+    <h2 th:text="#{title.list}" style="display: inline;">Tanks repository</h2>
+    <img src="../../../images/logo.png" alt="logo" title="logo" th:src="@{/images/logo.png}"
+         th:alt-title="#{title.application}" style="float: right;"/>
+    <p></p>
+</div>
+
+<footer th:fragment="site-footer">
+  Arkadiusz Stachowiak <a href="https://github.com/koczu/Tanks-Repository"> Source code</a>
+  &copy; Sternik Klaser czołgów 2018
+</footer>
+
+</body>
+</html>

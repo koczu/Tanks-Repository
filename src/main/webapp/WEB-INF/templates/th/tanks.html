@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="th/layout ::site-head">
+  <title>Tank Repository</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" type="text/css" media="all" href="../../css/klaser.css" th:href="@{/css/klaser.css}"/>
+</head>
+
+<body>
+<header th:replace="th/layout :: site-header"/>
+
+<div>
+    <form action="#" th:action="@{/tanks}" th:object="${tank}" method="post">
+
+      <fieldset>
+
+        <legend th:text="#{repository.tank.data}">Starter Data</legend>
+
+        <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+          <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+        </ul>
+
+        <div>
+          <label for="id"> <span th:text="#{repository.id}">id</span>
+          </label> <input type="text" th:field="*{id}" th:errorclass="fieldError"/>
+        </div>
+        <div>
+          <label for="name"> <span th:text="#{repository.name}">name</span>
+          </label> <input type="text" th:field="*{name}" th:errorclass="fieldError"/>
+        </div>
+        <div>
+          <label for="country"> <span th:text="#{repository.country}">country</span>
+          </label> <input type="text" th:field="*{country}" th:errorclass="fieldError"/>
+        </div>
+        <div>
+          <label for="description"> <span th:text="#{repository.description}">description</span>
+          </label> <input type="text" th:field="*{description}" th:errorclass="fieldError"/>
+        </div>
+        <div>
+          <label for="type"> <span th:text="#{repository.type}">type</span></label>
+          <select th:field="*{type}" th:errorclass="fieldError">
+            <option th:each="st : ${typesAll}" th:value="${st}" th:text="#{'repository.type.' + ${st}}">Heavy
+              tank
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="dateOfRelease"> <span th:text="#{repository.dateOfRelease}">Data of release</span> (<span
+                  th:text="#{date.format}">YYYY/MM/DD</span>)
+          </label> <input type="text" th:field="*{dateOfRelease}" th:errorclass="fieldError"/>
+        </div>
+        <div>
+          <label for="price"> <span th:text="#{repository.price}">price</span>
+          </label> <input type="text" th:field="*{price}" th:errorclass="fieldError"/>
+        </div>
+        <div>
+          <label for="status"> <span th:text="#{repository.status}">status</span></label>
+          <select th:field="*{status}" th:errorclass="fieldError">
+            <option th:each="st : ${statusAll}" th:value="${st}" th:text="#{'repository.status.' + ${st}}">New
+            </option>
+          </select>
+        </div>
+        <div class="submit">
+          <button th:if="*{id}" type="submit" name="save" th:value="*{id}">Save</button>
+
+
+          <button th:unless="*{id}" type="submit" name="create">Save</button>
+
+
+          <a href="repository.html" th:href="@{/tanks}">
+            <button type="button">Cancel</button>
+          </a>
+        </div>
+
+      </fieldset>
+
+    </form>
+
+</div>
+<footer th:replace="th/layout :: site-footer"/>
+</body>
+</html>
