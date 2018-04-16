@@ -1,3 +1,2 @@
-#Klaser Czołgów
+#Tanks Repository
 
-https://czolgiklaser.herokuapp.com/
